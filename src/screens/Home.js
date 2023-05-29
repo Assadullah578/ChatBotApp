@@ -1,13 +1,55 @@
-import React from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { Animated, Easing, View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import DrawerNavigation from '../Navigation/DrawerNavigation';
 import ChatButton from '../components/ChatButton';
 function Home({ navigation }) {
+   //Animation
+   const [scaleValue, setScaleValue] = useState(new Animated.Value(1));
+
+   useEffect(() => {
+      startAnimation();
+   }, []);
+
+   const startAnimation = () => {
+      Animated.loop(
+         Animated.sequence([
+            Animated.timing(scaleValue, {
+               toValue: 1.2, // Increase the scale to 2
+               duration: 1300,
+               easing: Easing.linear,
+               useNativeDriver: true,
+            }),
+            Animated.timing(scaleValue, {
+               toValue: 1, // Decrease the scale back to 1
+               duration: 1300,
+               easing: Easing.linear,
+               useNativeDriver: true,
+            }),
+         ]),
+      ).start();
+   };
+
+   const animatedStyle = {
+      transform: [{ scale: scaleValue }],
+   };
    return (
 
       <ImageBackground source={require('../Images/Bg.png')} className="w-full h-full " resizeMode="cover">
          <View className="mt-20 items-center flex-1">
-            <Image source={require('../Images/bot.png')} className="h-[290px] " resizeMode='contain' />
+            <Animated.View className="" style={[animatedStyle]}>
+               <ImageBackground
+                  source={require('../Images/Circle.png')}
+                  resizeMode="contain"
+                  className=" h-[300px] w-[300px] "
+               >
+
+                  <Image
+                     source={require('../Images/bot.png')}
+                     className="h-[250px] w-[250px] ml-[25px] mt-[30px]"
+                     resizeMode='contain'
+                  />
+               </ImageBackground>
+            </Animated.View>
             <View className="mt-5 w-[335px] ">
                <Text className="text-black text-2xl mt-4">
                   Better Method of creating
