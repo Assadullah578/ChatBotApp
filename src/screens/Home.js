@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Animated, Easing, View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native';
-import DrawerNavigation from '../Navigation/DrawerNavigation';
+import DrawerNavigation from '../navigation/DrawerNavigation';
 import ChatButton from '../components/ChatButton';
 function Home({ navigation }) {
    //Animation
@@ -14,7 +14,7 @@ function Home({ navigation }) {
       Animated.loop(
          Animated.sequence([
             Animated.timing(scaleValue, {
-               toValue: 1.2, // Increase the scale to 2
+               toValue: 1.1, // Increase the scale to 2
                duration: 1300,
                easing: Easing.linear,
                useNativeDriver: true,
